@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\verification;
+use App\Models\Verification;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use PragmaRX\Google2FA\Google2FA;
@@ -207,7 +207,7 @@ class AuthController extends Controller
         }
 
         // Hapus token reset_password lama yang masih aktif
-        verification::where('user_id', $user->id)
+        Verification::where('user_id', $user->id)
             ->where('type', 'reset_password')
             ->where('status', 'active')
             ->delete();
@@ -216,7 +216,7 @@ class AuthController extends Controller
         $token = Str::random(32);
 
         // Simpan token baru ke database verifications
-        verification::create([
+        Verification::create([
             'user_id' => $user->id,
             'unique_id' => $token,
             'otp' => '',
@@ -244,7 +244,7 @@ class AuthController extends Controller
         ]);
 
         // Cari verifikasi dengan token yang cocok
-        $verification = verification::where('unique_id', $request->token)
+        $verification = Verification::where('unique_id', $request->token)
             ->where('type', 'reset_password')
             ->where('status', 'active')
             ->first();
