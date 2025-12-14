@@ -25,7 +25,7 @@
                 </li>
             @endif
             <li class="nav-item">
-                <a href="/logout" class="nav-link">
+                <a href="/logout" class="nav-link {{ request()->is('logout') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-power-off"></i>
                 <p>
                     Logout
