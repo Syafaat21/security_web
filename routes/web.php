@@ -38,10 +38,10 @@ Route::group(['middleware' => ['auth', 'check_role:customer']], function () {
     Route::get('/verify/{unique_id}/resend', [VerificationController::class, 'resend']);
 });
 
-// Route::group(['middleware' => ['auth', 'check_role:customer', 'check_status']], function () {
-//     Route::get('/customer', fn() => 'SELAMAT ANDA BERHASIL LOGIN');
-// });
-Route::group(['middleware' => ['auth', 'check_role:admin, staff, customer']], function () {
+Route::group(['middleware' => ['auth', 'check_role:customer', 'check_status']], function () {
+    Route::get('/customer', fn() => 'SELAMAT ANDA BERHASIL LOGIN');
+});
+Route::group(['middleware' => ['auth', 'check_role:admin,staff']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
 
