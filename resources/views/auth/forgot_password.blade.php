@@ -50,8 +50,8 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div>{{ session('success') }}</div>
-                {{-- @if(session('reset_token'))
+                {{-- <div>{{ session('success') }}</div>
+                @if(session('reset_token'))
                     <hr class="my-2">
                     <small>
                         <strong>Link Reset Password untuk Testing:</strong><br>
@@ -59,8 +59,8 @@
                             {{ url('/reset_password/' . session('reset_token')) }}
                         </a>
                     </small>
-                @endif --}}
-                </div>
+                @endif
+                </div> --}}
             </div>
             @endif
             <div class="input-group mb-3">
