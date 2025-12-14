@@ -3,9 +3,11 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item">
-            <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2 mt-3 pb-3 mb-3 d-flex" alt="User Image">
-            <a href="#" class="d-block info">{{ auth()->user()->name }}</a>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item d-flex align-items-center">
+            <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" style="width: 40px; height: 40px;" alt="User Image">
+            <a href="#" class="d-block info ml-2" style="font-size: 14px;">{{ auth()->user()->name }}</a>
         </li>
     </ul>
 </nav>
