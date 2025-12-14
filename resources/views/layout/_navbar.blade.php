@@ -7,7 +7,7 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-flex align-items-center">
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" style="width: 40px; height: 40px;" alt="User Image">
-            <a href="#" class="d-block info ml-2" style="font-size: 14px;">{{ auth()->user()->name }}</a>
+            <a href="#" class="d-block info ml-2" style="font-size: 14px; color: #6c757d;"><b>{{ auth()->user()->name }}</b></a>
         </li>
     </ul>
 </nav>
