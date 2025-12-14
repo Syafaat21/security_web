@@ -53,7 +53,6 @@
                 {{ session('success') }}
                 </div>
 
-                <div>{{ session('success') }}</div>
                 @if(session('reset_token'))
                     <hr class="my-2">
                     <small>
