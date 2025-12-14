@@ -22,39 +22,7 @@
 
         <form action="/reset_password" method="POST">
             @csrf
-            <input type="hidden" name="token" value="{{ $token }}">
-
-            <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" id="password">
-            <div class="input-group-append show-password" style="cursor: pointer;">
-                <div class="input-group-text">
-                <span class="fas fa-lock" id="password-lock"></span>
-                </div>
-            </div>
-            @error('password')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
-            </div>
-            <div class="input-group mb-3">
-            <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="Confirm Password" id="confirm-password">
-            <div class="input-group-append show-confirm-password" style="cursor: pointer;">
-                <div class="input-group-text">
-                <span class="fas fa-lock" id="confirm-password-lock"></span>
-                </div>
-            </div>
-            @error('confirm_password')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
-            </div>
-            <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Change password</button>
-            </div>
-            <!-- /.col -->
-            </div>
-        </form>
-
-        @if($errors->any())
+            @if($errors->any())
             <div class="alert alert-danger fade show mt-3" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -65,7 +33,38 @@
                 @endforeach
             </ul>
             </div>
-        @endif
+            @endif
+            @error('password')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
+            <input type="hidden" name="token" value="{{ $token }}">
+
+            <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" id="password">
+            <div class="input-group-append show-password" style="cursor: pointer;">
+                <div class="input-group-text">
+                <span class="fas fa-lock" id="password-lock"></span>
+                </div>
+            </div>
+            </div>
+            @error('confirm_password')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
+            <div class="input-group mb-3">
+            <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="Confirm Password" id="confirm-password">
+            <div class="input-group-append show-confirm-password" style="cursor: pointer;">
+                <div class="input-group-text">
+                <span class="fas fa-lock" id="confirm-password-lock"></span>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block">Change password</button>
+            </div>
+            <!-- /.col -->
+            </div>
+        </form>
 
         <p class="mt-3 mb-1">
             <a href="/login">Login</a>
