@@ -54,7 +54,6 @@
                 </div>
 
                 @if(session('reset_token'))
-                    <hr class="my-2">
                     <small>
                         <strong>Link Reset Password untuk Testing:</strong><br>
                         <a href="{{ url('/reset_password/' . session('reset_token')) }}" target="_blank" class="alert-link">
