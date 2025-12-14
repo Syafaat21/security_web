@@ -4,7 +4,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto" style="margin-right: 20px;">
         <li class="nav-item d-flex align-items-center">
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" style="width: 30px; height: 30px;" alt="User Image">
             <a href="#" class="d-block info ml-2" style="font-size: 14px; color: #6c757d;"><b>{{ auth()->user()->name }}</b></a>
