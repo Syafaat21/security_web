@@ -27,7 +27,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
                 <div class="input-group mb-3">
-                <input type="number" name="otp" class="form-control" placeholder="xxxxxx">
+                <input type="number" name="otp" class="form-control" placeholder="XXXXXX">
                 <div class="input-group-append">
                     <div class="input-group-text">
                     <span class="fas fa-envelope"></span>
