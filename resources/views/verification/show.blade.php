@@ -17,16 +17,15 @@
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-
+        <form action="/verify/{{ $unique_id }}" method="post">
+            @method('PUT')
+            @csrf
             @if(session('failed'))
             <div class="alert alert-danger">{{ session('failed') }}</div>
             @endif
             @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-        <form action="/verify/{{ $unique_id }}" method="post">
-            @method('PUT')
-            @csrf
             <div class="input-group mb-3">
             <input type="number" name="otp" class="form-control" placeholder="xxxxxx">
             <div class="input-group-append">
@@ -36,14 +35,10 @@
             </div>
             </div>
             <div class="row">
-            <div class="col-8">
-
-            </div>
-
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </div>
-
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
             </div>
         </form>
         <p class="mb-0">

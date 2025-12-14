@@ -17,20 +17,19 @@
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-
-        <p class="login-box-msg">Please verify your account!</p>
-        <form action="/verify" method="post">
-            @csrf
-            @if(session('failed'))
-                <div class="alert alert-danger">{{ session('failed') }}</div>
-            @endif
-            <input type="hidden" value="register" name="type">
-            <div class="d-flex justify-content-center">
+            <p class="login-box-msg">Please verify your account!</p>
+            <form action="/verify" method="post">
+                @csrf
+                @if(session('failed'))
+                    <div class="alert alert-danger">{{ session('failed') }}</div>
+                @endif
+                <input type="hidden" value="register" name="type">
+                <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-sm btn-primary">
                         Send OTP to your email
                     </button>
                 </div>
-        </form>
+            </form>
         </div>
     </div>
 </div>
