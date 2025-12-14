@@ -221,7 +221,7 @@ class AuthController extends Controller
         // $resetLink = url('/reset_password/' . $token);
         // Mail::send(...) atau menggunakan OtpEmail mailable
 
-        return back()->with('success', 'Link telah dikirim ke email anda.')->with('reset_token', $token);
+        return back()->with('success', 'Link reset password telah dikirim ke email anda.')->with('reset_token', $token);
     }
 
     public function reset_password_view($token){
