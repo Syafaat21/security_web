@@ -15,7 +15,6 @@
     <div class="login-logo">
         <b>Security Password</b>
     </div>
-    <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
         <p class="login-box-msg">You are only one step a way from your new password, recover your password now.</p>
@@ -24,6 +23,9 @@
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
 
+            @error('password')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
             <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" id="password">
             <div class="input-group-append show-password" style="cursor: pointer;">
@@ -31,10 +33,11 @@
                 <span class="fas fa-lock" id="password-lock"></span>
                 </div>
             </div>
-            @error('password')
+            </div>
+
+            @error('confirm_password')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
-            </div>
             <div class="input-group mb-3">
             <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="Confirm Password" id="confirm-password">
             <div class="input-group-append show-confirm-password" style="cursor: pointer;">
@@ -42,45 +45,23 @@
                 <span class="fas fa-lock" id="confirm-password-lock"></span>
                 </div>
             </div>
-            @error('confirm_password')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
             </div>
             <div class="row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Change password</button>
             </div>
-            <!-- /.col -->
             </div>
         </form>
-
-        @if($errors->any())
-            <div class="alert alert-danger fade show mt-3" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul class="mb-0">
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            </div>
-        @endif
 
         <p class="mt-3 mb-1">
             <a href="/login">Login</a>
         </p>
         </div>
-        <!-- /.login-card-body -->
     </div>
 </div>
-<!-- /.login-box -->
 
-<!-- jQuery -->
 <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
 <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
 <script>
