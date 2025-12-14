@@ -15,10 +15,6 @@
   <div class="card">
     <div class="card-body login-card-body">
 
-      @if(session('failed'))
-        <div class="alert alert-danger">{{ session('failed') }}</div>
-      @endif
-
       <p class="login-box-msg">Enter the 6-digit code from your authenticator app.</p>
 
       <form action="/2fa" method="post">

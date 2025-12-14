@@ -30,10 +30,9 @@ class AuthController extends Controller
             return back()->with('failed', 'Akun Anda telah dibekukan.');
         }
 
-        $user->failed_login_attempts = 0; // Reset setelah berhasil login
+        $user->failed_login_attempts = 0;
         $user->save();
 
-        // Keep user id in session for 2FA flow then logout so routes protected by `auth` can't be accessed yet
         Session::put('2fa:user:id', $user->id);
         Session::put('2fa:user:remember', (bool)$request->remember);
         Auth::logout();
@@ -54,7 +53,6 @@ class AuthController extends Controller
         }
     }
 
-    // Show QR and secret for initial 2FA setup
     public function show2faSetup(Request $request){
         $userId = Session::get('2fa:user:id');
         if(!$userId) return redirect('/login')->with('failed', 'Sesi 2FA tidak ditemukan. Silakan login ulang.');
@@ -62,7 +60,6 @@ class AuthController extends Controller
         $user = User::find($userId);
         $google2fa = new Google2FA();
 
-        // Generate a temporary secret and save in session until user confirms
         if(!Session::has('2fa:secret_temp')){
             $secret = $google2fa->generateSecretKey();
             Session::put('2fa:secret_temp', $secret);
@@ -172,11 +169,9 @@ class AuthController extends Controller
         $user = User::find($userId);
         if(!$user) return redirect('/login')->with('failed', 'Pengguna tidak ditemukan.');
 
-        // Clear existing secret so show2faSetup will present a new secret/QR
         $user->two_factor_secret = null;
         $user->save();
 
-        // Remove any previous temp secret so a new one is generated
         Session::forget('2fa:secret_temp');
 
         return redirect()->route('2fa.setup')->with('success', '2FA di-reset. Silakan scan QR baru atau masukkan kunci secret.');
@@ -206,16 +201,13 @@ class AuthController extends Controller
             return back()->with('failed', 'Email tidak terdaftar.');
         }
 
-        // Hapus token reset_password lama yang masih aktif
         Verification::where('user_id', $user->id)
             ->where('type', 'reset_password')
             ->where('status', 'active')
             ->delete();
 
-        // Generate token unik
         $token = Str::random(32);
 
-        // Simpan token baru ke database verifications
         Verification::create([
             'user_id' => $user->id,
             'unique_id' => $token,
