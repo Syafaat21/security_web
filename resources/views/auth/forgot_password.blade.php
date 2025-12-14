@@ -52,6 +52,17 @@
                 </button>
                 {{ session('success') }}
                 </div>
+
+                {{-- <div>{{ session('success') }}</div>
+                @if(session('reset_token'))
+                    <hr class="my-2">
+                    <small>
+                        <strong>Link Reset Password untuk Testing:</strong><br>
+                        <a href="{{ url('/reset_password/' . session('reset_token')) }}" target="_blank" class="alert-link">
+                            {{ url('/reset_password/' . session('reset_token')) }}
+                        </a>
+                    </small>
+                @endif  --}}
             @endif
             <div class="input-group mb-3">
                 <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}">
