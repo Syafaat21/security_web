@@ -16,7 +16,7 @@
             </li>
             @if(auth()->user()->role == 'admin')
                 <li class="nav-item">
-                    <a href="/user" class="nav-link">
+                    <a href="/user" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user"></i>
                     <p>
                         Users
