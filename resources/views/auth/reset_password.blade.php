@@ -15,6 +15,7 @@
     <div class="login-logo">
         <b>Security Password</b>
     </div>
+    <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
         <p class="login-box-msg">You are only one step a way from your new password, recover your password now.</p>
@@ -49,18 +50,37 @@
             <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Change password</button>
             </div>
+            <!-- /.col -->
             </div>
         </form>
+
+        @if($errors->any())
+            <div class="alert alert-danger fade show mt-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+        @endif
 
         <p class="mt-3 mb-1">
             <a href="/login">Login</a>
         </p>
         </div>
+        <!-- /.login-card-body -->
     </div>
 </div>
+<!-- /.login-box -->
 
+<!-- jQuery -->
 <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
 <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
 <script>
