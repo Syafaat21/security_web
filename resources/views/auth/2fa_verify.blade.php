@@ -33,7 +33,7 @@
           <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         <div class="input-group mb-3">
-          <input type="text" name="code" value="{{ old('code') }}" class="form-control" placeholder="123456">
+          <input type="text" name="code" value="{{ old('code') }}" class="form-control" placeholder="xxxxxx">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-key"></span>
