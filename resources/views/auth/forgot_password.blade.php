@@ -24,16 +24,12 @@
             @error('email')
             <span class="invalid-feedback">{{ $message }}</span>
             @enderror
-            @if($errors->any())
+            @if(session('failed'))
             <div class="alert alert-danger fade show mt-3" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <ul class="mb-0">
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-            </ul>
+            {{ session('failed') }}
             </div>
             @endif
             <div class="input-group mb-3">
@@ -50,6 +46,19 @@
                 </div>
             </div>
         </form>
+
+        @if($errors->any())
+            <div class="alert alert-danger fade show mt-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+            </div>
+        @endif
 
         @if(session('success'))
             <div class="alert alert-success fade show mt-3" role="alert">
@@ -68,14 +77,6 @@
             @endif --}}
             </div>
         </div>
-        @endif
-        @if(session('failed'))
-            <div class="alert alert-danger fade show mt-3" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ session('failed') }}
-            </div>
         @endif
 
         <p class="mt-2 mb-1">
