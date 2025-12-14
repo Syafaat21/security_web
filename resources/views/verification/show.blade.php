@@ -13,7 +13,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <b>Security Web | OTP Email</b>
+        <b>Security Web</b> - OTP Email
     </div>
     <div class="card">
         <div class="card-body login-card-body">
