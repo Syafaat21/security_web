@@ -23,9 +23,6 @@
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
 
-            @error('password')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
             <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" id="password">
             <div class="input-group-append show-password" style="cursor: pointer;">
@@ -33,11 +30,10 @@
                 <span class="fas fa-lock" id="password-lock"></span>
                 </div>
             </div>
-            </div>
-
-            @error('confirm_password')
+            @error('password')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
+            </div>
             <div class="input-group mb-3">
             <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="Confirm Password" id="confirm-password">
             <div class="input-group-append show-confirm-password" style="cursor: pointer;">
@@ -45,6 +41,9 @@
                 <span class="fas fa-lock" id="confirm-password-lock"></span>
                 </div>
             </div>
+            @error('confirm_password')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
             </div>
             <div class="row">
             <div class="col-12">
