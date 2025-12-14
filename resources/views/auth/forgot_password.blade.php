@@ -24,6 +24,18 @@
             @error('email')
             <span class="invalid-feedback">{{ $message }}</span>
             @enderror
+            @if($errors->any())
+            <div class="alert alert-danger fade show mt-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+            </div>
+            @endif
             <div class="input-group mb-3">
                 <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}">
                 <div class="input-group-append">
@@ -38,19 +50,6 @@
                 </div>
             </div>
         </form>
-
-        @if($errors->any())
-            <div class="alert alert-danger fade show mt-3" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul class="mb-0">
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-            </ul>
-            </div>
-        @endif
 
         @if(session('success'))
             <div class="alert alert-success fade show mt-3" role="alert">
