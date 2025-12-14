@@ -23,15 +23,15 @@
   <div class="card">
     <div class="card-body login-card-body">
 
-        @if(session('failed'))
-          <div class="alert alert-danger">{{ session('failed') }}</div>
-        @endif
-        @if(session('success'))
-          <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-      <form action="/verify/{{ $unique_id }}" method="post">
-        @method('PUT')
-        @csrf
+        <form action="/verify/{{ $unique_id }}" method="post">
+            @method('PUT')
+            @csrf
+            @if(session('failed'))
+              <div class="alert alert-danger">{{ session('failed') }}</div>
+            @endif
+            @if(session('success'))
+              <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
         <div class="input-group mb-3">
           <input type="number" name="otp" class="form-control" placeholder="Enter OTP">
           <div class="input-group-append">
