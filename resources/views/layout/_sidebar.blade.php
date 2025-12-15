@@ -24,6 +24,16 @@
                     </a>
                 </li>
             @endif
+            @if(auth()->user()->role == 'customer')
+                <li class="nav-item">
+                    <a href="/dashboard_customer" class="nav-link {{ request()->is('dashboard_customer') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        Customer Dashboard
+                    </p>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item">
                 <a href="/logout" class="nav-link {{ request()->is('logout') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-power-off"></i>
