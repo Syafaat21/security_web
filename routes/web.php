@@ -38,9 +38,9 @@ Route::group(['middleware' => ['auth', 'check_role:customer']], function () {
     Route::get('/verify/{unique_id}/resend', [VerificationController::class, 'resend']);
 });
 
-// Route::group(['middleware' => ['auth', 'check_role:customer', 'check_status']], function () {
-//     Route::get('/customer', fn() => 'SELAMAT ANDA BERHASIL LOGIN');
-// });
+Route::group(['middleware' => ['auth', 'check_role:customer', 'check_status']], function () {
+    Route::get('/customer', fn() => 'SELAMAT ANDA BERHASIL LOGIN');
+});
 Route::group(['middleware' => ['auth', 'check_role:admin,staff']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
@@ -52,6 +52,3 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/ban_user/{userId}', [AuthController::class, 'ban_user'])->name('ban_user');
 Route::get('/auto_ban', [AuthController::class, 'auto_ban_inactive_users'])->name('auto_ban');
 Route::get('/auto_logout', [AuthController::class, 'auto_logout_inactive_users'])->name('auto_logout');
-Route::get('/dashboard_customer', function () {
-    return view('dashboard_customer');
-})->middleware('auth');
