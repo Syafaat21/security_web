@@ -44,6 +44,9 @@ Route::group(['middleware' => ['auth', 'check_role:customer', 'check_status']], 
 Route::group(['middleware' => ['auth', 'check_role:admin,staff']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
+Route::group(['middleware' => ['auth', 'check_role:customer']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+});
 
 Route::group(['middleware' => ['auth', 'check_role:admin']], function () {
     Route::get('/user', [DashboardController::class, 'users']);
