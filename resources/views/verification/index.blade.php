@@ -14,7 +14,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <b>Verification</b>
+        <b>Security Web</b> - Verification
     </div>
     <div class="card">
         <div class="card-body login-card-body">

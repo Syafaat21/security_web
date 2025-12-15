@@ -11,6 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\OtpPassword;
 
 class AuthController extends Controller
 {
@@ -220,7 +221,8 @@ class AuthController extends Controller
 
         // TODO: Kirim email dengan link reset password
         $resetLink = url('/reset_password/' . $token);
-        Mail::send(...); //atau menggunakan OtpEmail mailable
+        // Send email with reset password link
+        Mail::to($user->email)->send(new OtpPassword($resetLink));
 
         return back()->with('success', 'Link reset password telah dikirim ke email anda.')->with('reset_token', $token);
     }
