@@ -15,4 +15,8 @@ class DashboardController extends Controller
         $users = \App\Models\User::all();
         return view('menu.user', compact('users'));
     }
+
+    public function customer(){
+        return view('customer');
+    }
 }
