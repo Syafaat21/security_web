@@ -20,6 +20,28 @@
 
         <section class="content">
             <div class="container-fluid">
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('failed'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ session('failed') }}
+                    </div>
+                @endif
+                @if($errors->any())
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Daftar Pengguna</h3>
@@ -135,13 +157,16 @@
         </div>
     </div>
 
-    <script>
-        function editUser(id, name, email, role) {
-            document.getElementById('editUserForm').action = '/user/' + id;
-            document.getElementById('editName').value = name;
-            document.getElementById('editEmail').value = email;
-            document.getElementById('editRole').value = role;
-            $('#editUserModal').modal('show');
-        }
-    </script>
+@endsection
+
+@section('js')
+<script>
+    function editUser(id, name, email, role) {
+        document.getElementById('editUserForm').action = '/user/' + id;
+        document.getElementById('editName').value = name;
+        document.getElementById('editEmail').value = email;
+        document.getElementById('editRole').value = role;
+        $('#editUserModal').modal('show');
+    }
+</script>
 @endsection
