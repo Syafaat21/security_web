@@ -72,10 +72,7 @@
                                 <h3 class="card-title">Account Information</h3>
                             </div>
                             <div class="card-body">
-                                <p><strong>Name:</strong> {{ auth()->user()->name }}</p>
-                                <p><strong>Email:</strong> {{ auth()->user()->email }}</p>
-                                <p><strong>Role:</strong> {{ auth()->user()->role }}</p>
-                                <p><strong>Status:</strong> {{ auth()->user()->status }}</p>
+                                <p>Account Information is kept confidentially.</p>
                             </div>
                         </div>
                     </div>
