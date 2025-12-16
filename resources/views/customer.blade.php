@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <div class="row mt-4">
+                <div class="row mt-3">
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
