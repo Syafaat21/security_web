@@ -4823,7 +4823,11 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
 }
 
 .card > hr {
