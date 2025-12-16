@@ -8,7 +8,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ auth()->user()->name }}</h3>
+                                <h3>{{ auth()->check() ? auth()->user()->name : 'Guest' }}</h3>
                                 <p>Welcome Back!</p>
                             </div>
                             <div class="icon">

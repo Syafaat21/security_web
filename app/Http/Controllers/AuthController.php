@@ -31,7 +31,7 @@ class AuthController extends Controller
         }
 
         if($user->status == 'banned'){
-            return back()->with('failed', 'Akun Anda telah dibekukan.');
+            return back()->with('failed', 'Akun Anda telah diblokir.');
         }
 
         $user->failed_login_attempts = 0;
@@ -308,13 +308,13 @@ class AuthController extends Controller
         if(!$user) return back()->with('failed', 'Pengguna tidak ditemukan.');
 
         if($user->status == 'banned'){
-            return back()->with('failed', 'Pengguna sudah dibekukan.');
+            return back()->with('failed', 'Pengguna sudah diblokir.');
         }
 
         $user->status = 'banned';
         $user->save();
 
-        return back()->with('success', 'Pengguna berhasil dibekukan.');
+        return back()->with('success', 'Pengguna berhasil diblokir.');
     }
 
     public function auto_ban_inactive_users(){
@@ -327,7 +327,7 @@ class AuthController extends Controller
             $user->save();
         }
 
-        return response()->json(['message' => 'Pengguna tidak aktif telah dibekukan.']);
+        return response()->json(['message' => 'Pengguna tidak aktif telah diblokir.']);
     }
 
     public function auto_logout_inactive_users(){
