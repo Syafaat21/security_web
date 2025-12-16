@@ -12,6 +12,7 @@ use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpPassword;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -25,6 +26,7 @@ class AuthController extends Controller
 
         if(!$user || !Auth::attempt($request->only('email', 'password'), $request->remember)){
             $this->trackFailedLogin($user);
+            Log::warning('Login gagal', ['email' => $request->email, 'ip' => $request->ip()]);
             return back()->with('failed', 'Email atau password salah');
         }
 
@@ -34,6 +36,8 @@ class AuthController extends Controller
 
         $user->failed_login_attempts = 0;
         $user->save();
+
+        Log::info('Login berhasil', ['user_id' => $user->id, 'email' => $user->email, 'ip' => $request->ip()]);
 
         Session::put('2fa:user:id', $user->id);
         Session::put('2fa:user:remember', (bool)$request->remember);
@@ -46,12 +50,21 @@ class AuthController extends Controller
     }
 
     private function trackFailedLogin($user){
+        $ip = request()->ip();
         if($user){
             $user->failed_login_attempts++;
             if($user->failed_login_attempts >= 3){
                 $user->status = 'banned';
             }
             $user->save();
+        }
+
+        // Blokir IP setelah 5 upaya gagal dalam 1 jam
+        $failedAttempts = cache()->get("failed_login_{$ip}", 0);
+        cache()->put("failed_login_{$ip}", $failedAttempts + 1, 3600); // 1 jam
+
+        if($failedAttempts + 1 >= 5){
+            cache()->put("blocked_ip_{$ip}", true, 3600); // Blokir 1 jam
         }
     }
 
@@ -183,8 +196,10 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email|max:50',
-            'password' => 'required|max:50|min:8',
+            'password' => 'required|max:50|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
             'confirm_password' => 'required|max:50|min:8|same:password',
+        ], [
+            'password.regex' => 'Password harus mengandung huruf besar, kecil, angka, dan simbol khusus.',
         ]);
 
         $request['status'] = 'verify';
@@ -252,6 +267,8 @@ class AuthController extends Controller
         $user = User::find($verification->user_id);
         $user->password = $request->password;
         $user->save();
+
+        Log::info('Password direset', ['user_id' => $user->id, 'email' => $user->email, 'ip' => $request->ip()]);
 
         // Update status verifikasi menjadi valid
         $verification->status = 'valid';

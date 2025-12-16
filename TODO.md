@@ -12,3 +12,14 @@
 ## Summary
 
 The customer dashboard has been successfully implemented. Customers can now access a proper dashboard at /customer instead of the plain text message. The dashboard includes welcome message, user info, and placeholder cards for future features.
+
+## Additional Security Features
+
+-   [ ] Install package untuk CAPTCHA (mebmercaptcha atau google recaptcha)
+-   [ ] Tambahkan rate limiting pada rute login di routes/web.php
+-   [ ] Tambahkan validasi kekuatan password di AuthController
+-   [ ] Implementasi blokir IP setelah upaya gagal berulang
+-   [ ] Tambahkan logging audit untuk aksi sensitif
+-   [ ] Tambahkan header keamanan (CSP, HSTS) di middleware
+-   [ ] Update form login dan register dengan CAPTCHA
+-   [ ] Test semua fitur keamanan tanpa merusak yang sudah ada

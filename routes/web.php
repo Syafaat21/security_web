@@ -5,12 +5,13 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::middleware('security_headers')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
 Route::get('/login', fn() => view('auth.login'))->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
 
 Route::get('/2fa/setup', [AuthController::class, 'show2faSetup'])->name('2fa.setup');
 Route::post('/2fa/setup', [AuthController::class, 'post2faSetup']);
@@ -52,3 +53,4 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/ban_user/{userId}', [AuthController::class, 'ban_user'])->name('ban_user');
 Route::get('/auto_ban', [AuthController::class, 'auto_ban_inactive_users'])->name('auto_ban');
 Route::get('/auto_logout', [AuthController::class, 'auto_logout_inactive_users'])->name('auto_logout');
+});
