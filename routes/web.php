@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('security_headers')->group(function () {
+Route::middleware(['security_headers', 'session.timeout'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
@@ -56,4 +56,10 @@ Route::middleware('security_headers')->group(function () {
     Route::post('/ban_user/{userId}', [AuthController::class, 'ban_user'])->name('ban_user');
     Route::get('/auto_ban', [AuthController::class, 'auto_ban_inactive_users'])->name('auto_ban');
     Route::get('/auto_logout', [AuthController::class, 'auto_logout_inactive_users'])->name('auto_logout');
+
+    // Auto logout system routes
+    Route::middleware('auth')->group(function () {
+        Route::post('/extend-session', [AuthController::class, 'extendSession'])->name('extend_session');
+        Route::get('/check-session', [AuthController::class, 'checkSession'])->name('check_session');
+    });
 });

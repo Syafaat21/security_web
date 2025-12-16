@@ -341,4 +341,59 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Pengguna tidak aktif telah logout otomatis.']);
     }
+
+    /**
+     * Extend user session when activity is detected
+     */
+    public function extendSession(Request $request){
+        // Update user's last activity timestamp
+        $user = Auth::user();
+        if ($user) {
+            $user->updated_at = now();
+            $user->save();
+
+            // Also update session
+            $request->session()->put('last_activity', now());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Session extended successfully',
+                'extended_until' => now()->addMinutes(3)->toISOString() // 2 hours from now
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'User not authenticated'
+        ], 401);
+    }
+
+    /**
+     * Check if user session is still valid on server side
+     */
+    public function checkSession(Request $request){
+        if (Auth::check()) {
+            // Update last activity
+            $user = Auth::user();
+            $user->updated_at = now();
+            $user->save();
+
+            $request->session()->put('last_activity', now());
+
+            return response()->json([
+                'valid' => true,
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email
+                ],
+                'last_activity' => now()->toISOString()
+            ]);
+        }
+
+        return response()->json([
+            'valid' => false,
+            'message' => 'Session expired'
+        ], 401);
+    }
 }

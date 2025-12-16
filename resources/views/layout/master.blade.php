@@ -34,6 +34,17 @@
 <script>$.widget.bridge('uibutton', $.ui.button)</script>
 <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('adminlte/dist/js/adminlte.js')}}"></script>
+
+<!-- Auto Logout System -->
+<script>
+    // Pass Laravel auth data to JavaScript
+    window.Laravel = {
+        user: @json(auth()->user()),
+        csrfToken: '{{ csrf_token() }}'
+    };
+</script>
+<script src="{{ mix('js/auto-logout.js') }}"></script>
+
 @yield('js')
 </body>
 </html>
