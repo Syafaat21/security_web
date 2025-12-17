@@ -13,7 +13,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <b>Security Web</b> - Login
+        <b>Security Web</b> - Log in
     </div>
     <div class="card">
         <div class="card-body login-card-body">
