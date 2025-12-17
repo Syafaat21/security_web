@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['security_headers', 'session.timeout'])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return redirect('/login');
     });
 
     Route::get('/login', fn() => view('auth.login'))->name('login');
