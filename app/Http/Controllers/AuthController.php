@@ -53,18 +53,20 @@ class AuthController extends Controller
         $ip = request()->ip();
         if($user){
             $user->failed_login_attempts++;
-            if($user->failed_login_attempts >= 3){
+            if($user->failed_login_attempts >= 3 && $user->role != 'admin'){
                 $user->status = 'banned';
             }
             $user->save();
         }
 
-        // Blokir IP setelah 5 upaya gagal dalam 1 jam
-        $failedAttempts = cache()->get("failed_login_{$ip}", 0);
-        cache()->put("failed_login_{$ip}", $failedAttempts + 1, 3600); // 1 jam
+        // Blokir IP setelah 5 upaya gagal dalam 1 jam, kecuali jika pengguna adalah admin
+        if(!$user || $user->role != 'admin'){
+            $failedAttempts = cache()->get("failed_login_{$ip}", 0);
+            cache()->put("failed_login_{$ip}", $failedAttempts + 1, 3600); // 1 jam
 
-        if($failedAttempts + 1 >= 5){
-            cache()->put("blocked_ip_{$ip}", true, 3600); // Blokir 1 jam
+            if($failedAttempts + 1 >= 5){
+                cache()->put("blocked_ip_{$ip}", true, 3600); // Blokir 1 jam
+            }
         }
     }
 
@@ -319,6 +321,7 @@ class AuthController extends Controller
 
     public function auto_ban_inactive_users(){
         $inactiveUsers = User::where('status', 'active')
+            ->where('role', '!=', 'admin')
             ->where('updated_at', '<', now()->subMinute())
             ->get();
 
