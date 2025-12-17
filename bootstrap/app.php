@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'check_role' => App\Http\Middleware\CheckRole::class,
             'check_status' => App\Http\Middleware\CheckStatus::class,
             'session.timeout' => App\Http\Middleware\SessionTimeout::class,
+            'security_headers' => App\Http\Middleware\SecurityHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
