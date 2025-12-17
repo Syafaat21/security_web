@@ -62,10 +62,10 @@ class AuthController extends Controller
         // Blokir IP setelah 5 upaya gagal dalam 1 jam, kecuali jika pengguna adalah admin
         if(!$user || $user->role != 'admin'){
             $failedAttempts = cache()->get("failed_login_{$ip}", 0);
-            cache()->put("failed_login_{$ip}", $failedAttempts + 1, 3600); // 1 jam
+            cache()->put("failed_login_{$ip}", $failedAttempts + 1, 300);
 
             if($failedAttempts + 1 >= 5){
-                cache()->put("blocked_ip_{$ip}", true, 3600); // Blokir 1 jam
+                cache()->put("blocked_ip_{$ip}", true, 300);
             }
         }
     }
