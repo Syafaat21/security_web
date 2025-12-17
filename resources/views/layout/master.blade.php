@@ -43,7 +43,7 @@
         csrfToken: '{{ csrf_token() }}'
     };
 </script>
-<script src="{{ mix('js/auto-logout.js') }}"></script>
+@vite(['resources/js/auto-logout.js'])
 
 @yield('js')
 </body>
