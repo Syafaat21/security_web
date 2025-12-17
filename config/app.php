@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -123,4 +122,20 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Application Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register all of the service providers for an
+    | application. These service providers are loaded automatically on
+    | the request to your application. Feel free to add your own to
+    | this array to grant expanded functionality to your applications.
+    |
+    */
+
+    'providers' => [
+        // ...existing providers...
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+    ],
 ];
