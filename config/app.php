@@ -136,6 +136,5 @@ return [
 
     'providers' => [
         // ...existing providers...
-        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 ];
