@@ -77,6 +77,7 @@
                                     </td>
                                     <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                     <td>
+                                        @if($user->role != 'admin')
                                         <div class="btn-group">
                                             <button class="btn btn-sm btn-primary" onclick="editUser({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->role }}')">
                                                 <i class="fas fa-edit"></i> Edit
@@ -106,6 +107,7 @@
                                             </form>
                                             @endif
                                         </div>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
